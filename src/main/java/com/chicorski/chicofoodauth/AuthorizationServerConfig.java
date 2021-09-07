@@ -34,12 +34,14 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                         .accessTokenValiditySeconds(60 * 60 * 6) // 6 horas
                         .refreshTokenValiditySeconds(60 * 60 * 24 * 7) // 7 Dias
                 .and()
-                    .withClient("chicofood-api")
+                    .withClient("chicofood-api-check-token")
                         .secret(passwordEncoder.encode("api123"))
-                        .authorizedGrantTypes("password")
+                .and()
+                        .withClient("chicofood-api-client-credentials")
+                        .secret(passwordEncoder.encode("api123"))
+                        .authorizedGrantTypes("client_credentials")
                         .scopes("write", "read")
-                        .accessTokenValiditySeconds(60 * 60 * 6) // 6 horas
-                        .refreshTokenValiditySeconds(60 * 60 * 24 * 7); // 7 Dias
+        ;
     }
 
     @Override
