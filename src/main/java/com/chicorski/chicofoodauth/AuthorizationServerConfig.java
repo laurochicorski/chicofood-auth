@@ -29,8 +29,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                         .scopes("write", "read")
                         .accessTokenValiditySeconds(60 * 60 * 6)
                 .and()
-                    .withClient("chicofood-mobile")
-                        .secret(passwordEncoder.encode("mob123"))
+                    .withClient("chicofood-api")
+                        .secret(passwordEncoder.encode("api123"))
                         .authorizedGrantTypes("password")
                         .scopes("write", "read");
     }
