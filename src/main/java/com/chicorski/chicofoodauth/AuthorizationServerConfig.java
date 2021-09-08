@@ -34,6 +34,12 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                         .accessTokenValiditySeconds(60 * 60 * 6) // 6 horas
                         .refreshTokenValiditySeconds(60 * 60 * 24 * 7) // 7 Dias
                 .and()
+                    .withClient("chicofoodanalytics")
+                    .secret(passwordEncoder.encode("api123"))
+                    .authorizedGrantTypes("authorization_code")
+                    .scopes("write", "read")
+                    .redirectUris("http://aplicacao-cliente")
+                .and()
                     .withClient("chicofood-api-check-token")
                         .secret(passwordEncoder.encode("api123"))
                 .and()
@@ -41,12 +47,14 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                         .secret(passwordEncoder.encode("api123"))
                         .authorizedGrantTypes("client_credentials")
                         .scopes("write", "read")
+
         ;
     }
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-        security.checkTokenAccess("isAuthenticated()");
+        security.checkTokenAccess("permitAll()");
+//        security.checkTokenAccess("isAuthenticated()");
     }
 
     @Override
