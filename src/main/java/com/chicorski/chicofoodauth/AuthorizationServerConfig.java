@@ -38,7 +38,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                     .secret(passwordEncoder.encode("api123"))
                     .authorizedGrantTypes("authorization_code")
                     .scopes("write", "read")
-                    .redirectUris("http://aplicacao-cliente")
+                    .redirectUris("http://localhost:8000")
                 .and()
                     .withClient("chicofood-api-check-token")
                         .secret(passwordEncoder.encode("api123"))
