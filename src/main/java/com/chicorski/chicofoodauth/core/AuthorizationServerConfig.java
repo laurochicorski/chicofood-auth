@@ -1,4 +1,4 @@
-package com.chicorski.chicofoodauth;
+package com.chicorski.chicofoodauth.core;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

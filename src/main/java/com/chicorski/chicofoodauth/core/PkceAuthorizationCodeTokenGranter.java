@@ -1,4 +1,4 @@
-package com.chicorski.chicofoodauth;
+package com.chicorski.chicofoodauth.core;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

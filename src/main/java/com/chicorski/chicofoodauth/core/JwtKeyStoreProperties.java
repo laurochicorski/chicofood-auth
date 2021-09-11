@@ -1,4 +1,4 @@
-package com.chicorski.chicofoodauth;
+package com.chicorski.chicofoodauth.core;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
