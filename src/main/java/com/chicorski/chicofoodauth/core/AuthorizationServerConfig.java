@@ -45,7 +45,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                     .withClient("chicofood-web")
                         .secret(passwordEncoder.encode("web123"))
                         .authorizedGrantTypes("password", "refresh_token")
-                        .scopes("write", "read")
+                        .scopes("WRITE", "READ")
                         .accessTokenValiditySeconds(60 * 60 * 6) // 6 horas
                         .refreshTokenValiditySeconds(60 * 60 * 24 * 7) // 7 Dias
                 .and()
@@ -53,7 +53,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 //                    .secret(passwordEncoder.encode("api123"))
                     .secret(passwordEncoder.encode(""))
                     .authorizedGrantTypes("authorization_code")
-                    .scopes("write", "read")
+                    .scopes("WRITE", "READ")
                     .redirectUris("http://localhost:8000")
                 .and()
                     .withClient("chicofood-api-check-token")
@@ -62,11 +62,11 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                         .withClient("chicofood-api-client-credentials")
                         .secret(passwordEncoder.encode("api123"))
                         .authorizedGrantTypes("client_credentials")
-                        .scopes("write", "read")
+                        .scopes("WRITE", "READ")
                 .and()
                     .withClient("webadmin")
                     .authorizedGrantTypes("implicit")
-                    .scopes("write", "read")
+                    .scopes("WRITE", "READ")
                     .redirectUris("http://aplicacao-cliente")
         ;
     }
