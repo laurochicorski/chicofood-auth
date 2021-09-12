@@ -21,6 +21,7 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;
 
+import javax.sql.DataSource;
 import java.util.Arrays;
 
 @Configuration
@@ -39,36 +40,12 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Autowired
     private JwtKeyStoreProperties jwtKeyStoreProperties;
 
+    @Autowired
+    private DataSource dataSource;
+
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.inMemory()
-                    .withClient("chicofood-web")
-                        .secret(passwordEncoder.encode("web123"))
-                        .authorizedGrantTypes("password", "refresh_token")
-                        .scopes("WRITE", "READ")
-                        .accessTokenValiditySeconds(60 * 60 * 6) // 6 horas
-                        .refreshTokenValiditySeconds(60 * 60 * 24 * 7) // 7 Dias
-                .and()
-                    .withClient("chicofoodanalytics")
-//                    .secret(passwordEncoder.encode("api123"))
-                    .secret(passwordEncoder.encode(""))
-                    .authorizedGrantTypes("authorization_code")
-                    .scopes("WRITE", "READ")
-                    .redirectUris("http://localhost:8000")
-                .and()
-                    .withClient("chicofood-api-check-token")
-                        .secret(passwordEncoder.encode("api123"))
-                .and()
-                        .withClient("chicofood-api-client-credentials")
-                        .secret(passwordEncoder.encode("api123"))
-                        .authorizedGrantTypes("client_credentials")
-                        .scopes("WRITE", "READ")
-                .and()
-                    .withClient("webadmin")
-                    .authorizedGrantTypes("implicit")
-                    .scopes("WRITE", "READ")
-                    .redirectUris("http://aplicacao-cliente")
-        ;
+        clients.jdbc(dataSource);
     }
 
     @Override
